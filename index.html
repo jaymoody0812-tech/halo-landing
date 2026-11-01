@@ -157,6 +157,27 @@
     .stat-block .number { font-size: 2rem; font-weight: 800; color: var(--accent); }
     .stat-block .label  { font-size: .85rem; color: var(--muted); margin-top: 4px; }
 
+    /* ── Support ── */
+    .support-strip {
+      max-width: 760px; margin: 0 auto; padding: 0 24px 64px;
+    }
+    .support-card {
+      background: var(--surface);
+      border: 1px solid rgba(79,142,247,.25);
+      border-radius: var(--radius);
+      padding: 32px 36px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px; flex-wrap: wrap;
+    }
+    .support-card .sup-text h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .support-card .sup-text p  { color: var(--muted); font-size: .9rem; max-width: 460px; line-height: 1.55; }
+    .sup-btns { display: flex; gap: 10px; flex-wrap: wrap; flex-shrink: 0; }
+    .btn-sup { padding: 11px 24px; border-radius: 8px; font-size: .9rem; font-weight: 600; }
+    .btn-paypal { background: #0070ba; color: #fff; }
+    .btn-paypal:hover { opacity: .88; text-decoration: none; }
+    .btn-sub { background: transparent; border: 1px solid var(--border); color: var(--text); }
+    .btn-sub:hover { border-color: var(--accent); text-decoration: none; }
+
     /* ── Footer ── */
     footer {
       border-top: 1px solid var(--border);
@@ -190,7 +211,8 @@
 <section class="hero">
   <div class="hero-badge">Open Research Project — CNY</div>
   <h1>AI that <em>listens</em> before it answers.</h1>
-  <p>HALO is a suite of tools built to close the gap between people in crisis and systems that can't keep up. Caregiver support. Threat analysis. Learning. One method.</p>
+  <p style="font-size:1.15rem;color:#c8ccd4;max-width:620px;margin:0 auto 12px;font-style:italic;line-height:1.5;">The data shows 47% of people go silent before they fall apart. I know because I was one of them, and I was the one measuring it.</p>
+  <p>Three tools built to close the gap between people in crisis and systems that can't keep up. Caregiver support. Threat analysis. Learning. One method.</p>
   <div class="hero-btns">
     <a href="#apps" class="btn btn-primary">See the Tools</a>
     <a href="https://github.com/jaymoody0812-tech" target="_blank" class="btn btn-outline">GitHub →</a>
@@ -254,6 +276,7 @@
 
 <!-- Story -->
 <div style="padding-top:64px;" id="story"></div>
+
 <div class="story">
   <div class="story-card">
     <h2>Why this exists.</h2>
@@ -264,6 +287,20 @@
       <a href="https://github.com/jaymoody0812-tech" target="_blank">github.com/jaymoody0812-tech</a> &nbsp;·&nbsp;
       <a href="mailto:jaymoody0812@gmail.com">jaymoody0812@gmail.com</a>
     </p>
+  </div>
+</div>
+
+<!-- Support -->
+<div class="support-strip">
+  <div class="support-card">
+    <div class="sup-text">
+      <h3>Support the work</h3>
+      <p>I built this during one of the hardest years my family has had. It's still free. If it's worth something to you, anything helps — it keeps the servers on and me building.</p>
+    </div>
+    <div class="sup-btns">
+      <a href="https://paypal.me/jaymoody0812" target="_blank" class="btn btn-sup btn-paypal">Chip in via PayPal</a>
+      <a href="https://substack.com/@jaymoody0812" target="_blank" class="btn btn-sup btn-sub">Follow on Substack</a>
+    </div>
   </div>
 </div>
 
