@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HALO System — Human-AI Loop Outreach</title>
+  <meta name="description" content="HALO is an AI-assisted mental health and learning support system built in CNY. Three tools, one method: caregiver support, academic threat analysis, and guided learning.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d0f14;
+      --surface: #151820;
+      --border: #252a38;
+      --accent: #4f8ef7;
+      --accent2: #7c5cbf;
+      --green: #3ecf6e;
+      --text: #e8eaf0;
+      --muted: #8892a4;
+      --radius: 12px;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky; top: 0;
+      background: rgba(13,15,20,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      z-index: 100;
+    }
+    .nav-logo { font-weight: 700; font-size: 1.15rem; letter-spacing: .04em; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 24px; font-size: .9rem; color: var(--muted); }
+    .nav-links a { color: var(--muted); }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* ── Hero ── */
+    .hero {
+      max-width: 860px; margin: 0 auto;
+      padding: 80px 24px 48px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(79,142,247,.12);
+      border: 1px solid rgba(79,142,247,.3);
+      color: var(--accent);
+      font-size: .78rem; font-weight: 600; letter-spacing: .08em;
+      padding: 5px 14px; border-radius: 20px;
+      margin-bottom: 24px; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800; line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero p {
+      font-size: 1.1rem; color: var(--muted);
+      max-width: 600px; margin: 0 auto 36px;
+    }
+    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 12px 28px; border-radius: 8px;
+      font-size: .95rem; font-weight: 600; cursor: pointer;
+      transition: opacity .15s, transform .1s;
+    }
+    .btn:hover { opacity: .88; text-decoration: none; transform: translateY(-1px); }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+
+    /* ── Apps grid ── */
+    .section { max-width: 1060px; margin: 0 auto; padding: 56px 24px; }
+    .section-label {
+      font-size: .8rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .section h2 { font-size: 1.75rem; margin-bottom: 8px; }
+    .section > p { color: var(--muted); margin-bottom: 40px; max-width: 560px; }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .app-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex; flex-direction: column; gap: 12px;
+      transition: border-color .2s, transform .15s;
+    }
+    .app-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .app-icon {
+      width: 46px; height: 46px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+    }
+    .icon-blue  { background: rgba(79,142,247,.15); }
+    .icon-purple{ background: rgba(124,92,191,.15); }
+    .icon-green { background: rgba(62,207,110,.15); }
+    .app-card h3 { font-size: 1.1rem; font-weight: 700; }
+    .app-card p  { font-size: .9rem; color: var(--muted); flex: 1; }
+    .app-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .88rem; font-weight: 600; color: var(--accent);
+      margin-top: 4px;
+    }
+    .app-link:hover { text-decoration: underline; }
+    .status-dot {
+      display: inline-block; width: 7px; height: 7px;
+      border-radius: 50%; background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+    }
+
+    /* ── Story ── */
+    .story {
+      max-width: 760px; margin: 0 auto; padding: 0 24px 64px;
+    }
+    .story-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent2);
+      border-radius: var(--radius);
+      padding: 32px 36px;
+    }
+    .story-card h2 { font-size: 1.4rem; margin-bottom: 16px; }
+    .story-card p  { color: var(--muted); margin-bottom: 12px; }
+    .story-card p:last-child { margin-bottom: 0; }
+
+    /* ── Research strip ── */
+    .research-strip {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 24px;
+    }
+    .research-inner {
+      max-width: 1060px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+    }
+    .stat-block { text-align: center; }
+    .stat-block .number { font-size: 2rem; font-weight: 800; color: var(--accent); }
+    .stat-block .label  { font-size: .85rem; color: var(--muted); margin-top: 4px; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--muted); font-size: .85rem;
+    }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--text); }
+    .footer-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px; }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hero { padding: 48px 20px 32px; }
+      .story-card { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><span>HALO</span> System</div>
+  <div class="nav-links">
+    <a href="#apps">Apps</a>
+    <a href="#research">Research</a>
+    <a href="#story">About</a>
+    <a href="https://github.com/jaymoody0812-tech" target="_blank">GitHub</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">Open Research Project — CNY</div>
+  <h1>AI that <em>listens</em> before it answers.</h1>
+  <p>HALO is a suite of tools built to close the gap between people in crisis and systems that can't keep up. Caregiver support. Threat analysis. Learning. One method.</p>
+  <div class="hero-btns">
+    <a href="#apps" class="btn btn-primary">See the Tools</a>
+    <a href="https://github.com/jaymoody0812-tech" target="_blank" class="btn btn-outline">GitHub →</a>
+  </div>
+</section>
+
+<!-- Apps -->
+<section class="section" id="apps">
+  <div class="section-label">Live Systems</div>
+  <h2>Three tools. One method.</h2>
+  <p>Each app addresses a different breakdown point in mental health, education, and caregiving — grounded in the same validated evidence base.</p>
+
+  <div class="apps-grid">
+    <div class="app-card">
+      <div class="app-icon icon-blue">🫂</div>
+      <h3>HALO Caregiver</h3>
+      <p>AI companion for unpaid caregivers — mood tracking, crisis triage, resource routing, and a weekly check-in that actually remembers your history.</p>
+      <div><span class="status-dot"></span> <span style="font-size:.8rem;color:var(--muted)">Live</span></div>
+      <a class="app-link" href="https://halo-caregiver-app.onrender.com" target="_blank">Open app →</a>
+    </div>
+
+    <div class="app-card">
+      <div class="app-icon icon-purple">🌐</div>
+      <h3>HALO TA</h3>
+      <p>Threat analysis dashboard — live data feeds, cascade prediction scoring, geopolitical pattern tracking, and the CCT validation engine.</p>
+      <div><span class="status-dot"></span> <span style="font-size:.8rem;color:var(--muted)">Live</span></div>
+      <a class="app-link" href="https://halo-ta-cct.onrender.com" target="_blank">Open app →</a>
+    </div>
+
+    <div class="app-card">
+      <div class="app-icon icon-green">📚</div>
+      <h3>HALO Tutor</h3>
+      <p>Evidence-grounded academic companion — structured for SUNY coursework, with a library of modules and grounding sources built into every response.</p>
+      <div><span class="status-dot"></span> <span style="font-size:.8rem;color:var(--muted)">Live</span></div>
+      <a class="app-link" href="https://halo-tutor-1.onrender.com" target="_blank">Open app →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Research numbers -->
+<div class="research-strip" id="research">
+  <div class="research-inner">
+    <div class="stat-block">
+      <div class="number">672</div>
+      <div class="label">Check-ins logged<br>N=1 clinical case study</div>
+    </div>
+    <div class="stat-block">
+      <div class="number">47.2%</div>
+      <div class="label">Silent distress rate<br>Fisher p = 0.0005</div>
+    </div>
+    <div class="stat-block">
+      <div class="number">PHQ 21→7</div>
+      <div class="label">Depression trajectory<br>216 days longitudinal</div>
+    </div>
+    <div class="stat-block">
+      <div class="number">Cliff d = 1.000</div>
+      <div class="label">Effect size<br>Sentinel vs. Stabilizer</div>
+    </div>
+  </div>
+</div>
+
+<!-- Story -->
+<div style="padding-top:64px;" id="story"></div>
+<div class="story">
+  <div class="story-card">
+    <h2>Why this exists.</h2>
+    <p>HALO started as a mood tracker for one person trying to stay functional long enough to figure out what was wrong. Over two years and 27,000 conversation turns, it became a research method, a clinical data source, and a platform.</p>
+    <p>The Cascade Compression Theory (CCT) — the framework underneath HALO — predicts when people go silent before they deteriorate. The data says 47% of the time they do. Standard intake tools catch almost none of it.</p>
+    <p>Built in Central New York. Validated on real data. No VC funding, no team, no IRB yet — just a method that works and a case study that says so.</p>
+    <p style="margin-top:16px;">
+      <a href="https://github.com/jaymoody0812-tech" target="_blank">github.com/jaymoody0812-tech</a> &nbsp;·&nbsp;
+      <a href="mailto:jaymoody0812@gmail.com">jaymoody0812@gmail.com</a>
+    </p>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="https://halo-caregiver-app.onrender.com/terms" target="_blank">Terms</a>
+    <a href="https://halo-caregiver-app.onrender.com/privacy" target="_blank">Privacy</a>
+    <a href="https://github.com/jaymoody0812-tech" target="_blank">GitHub</a>
+    <a href="mailto:jaymoody0812@gmail.com">Contact</a>
+  </div>
+  <div>HALO System · Jacob Moody · Central New York · 2026</div>
+  <div style="margin-top:6px;font-size:.78rem;opacity:.5;">This system uses AI. See Terms for AI disclosure. HALO is not a medical device and does not replace clinical care.</div>
+</footer>
+
+</body>
+</html>
